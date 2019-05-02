@@ -1,8 +1,10 @@
 #!/usr/bin/python
 import sys
-import Adafruit_DHT
 import I2C_LCD_driver
 from time import*
+import Adafruit_DHT
+
+mylcd = I2C_LCD_driver.lcd()
 
 mylcd = I2C_LCD_driver.lcd()
 print("Plantz monitor script running")
