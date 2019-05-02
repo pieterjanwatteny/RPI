@@ -12,7 +12,7 @@ while True:
 
     humidity, temperature = Adafruit_DHT.read_retry(11, 4)
     mylcd.lcd_display_string('Temp: {0:0.1f} C'.format(temperature),1)
-    mylcd.lcd_display_string('Humidity: {1:0.1f} %'.format(humidity), 2)
+    mylcd.lcd_display_string('Hum: %'.format(humidity), 2)
 
     print('Temp: {0:0.1f} C  Humidity: {1:0.1f} %'.format(temperature, humidity))
 
