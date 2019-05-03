@@ -11,16 +11,13 @@ mylcd.lcd_clear()
 mylcd.lcd_display_string("NOMNOM DATA", 1)
 mylcd.lcd_display_string("PLS STAND BY...", 2)
 
-GPIO.setwarnings(False) # Ignore warning for now
+def buttonPress():
+     print("Button pushed")
+
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
-
-def buttonPress(channel):
-     mylcd.lcd_clear()
-     mylcd.lcd_display_string("PUSH ME BABY", 1)
-
-GPIO.add_event_detect(10,GPIO.RISING,callback=buttonPress(10))
-
+GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.add_event_detect(10,GPIO.RISING,callback=buttonPress())
 GPIO.cleanup()
 
 def readPrint():
