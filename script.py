@@ -24,17 +24,18 @@ GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.add_event_detect(10,GPIO.RISING,buttonPress, bouncetime=200)
 GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(12, GPIO.OUT)
-pwm=GPIO.PWM(12, 50)
+
+pwm = GPIO.PWM(12, 50)
 pwm.start(0)
 
 
 def setServoAngle(angle):
     duty= angle/18+2
     GPIO.output(12,True)
-    pwm.CangeDutyCycle(duty)
+    pwm.ChangeDutyCycle(duty)
     sleep(1)
     GPIO.output(12,False)
-    pwm.CangeDutyCycle(0)
+    pwm.ChangeDutyCycle(0)
 
 
 def readPrint():
