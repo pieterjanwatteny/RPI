@@ -5,7 +5,9 @@ import I2C_LCD_driver
 import time
 mylcd = I2C_LCD_driver.lcd()
 
-mylcd.lcd_display_string("TRYING TO GATHER DATA", 1)
+mylcd.lcd_clear()
+
+mylcd.lcd_display_string("GATHER DATA", 1)
 
 def read_print():
     while True:
