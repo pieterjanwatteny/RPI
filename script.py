@@ -15,15 +15,26 @@ mylcd.lcd_display_string("PLS STAND BY...", 2)
 
 def buttonPress(channel):
     print("Button pushed")
-    print("Initiate Blinky")
-    blink()
+    setServoAngle(90)
 
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
 GPIO.add_event_detect(10,GPIO.RISING,buttonPress, bouncetime=200)
+GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(12, GPIO.OUT)
+pwm=GPIO.PWM(12, 50)
+pwm.start(0)
+
+
+def setServoAngle(angle):
+    duty= angle/18+2
+    GPIO.output(12,True)
+    pwm.CangeDutyCycle(duty)
+    sleep(1)
+    GPIO.output(12,False)
+    pwm.CangeDutyCycle(0)
 
 
 def readPrint():
@@ -36,13 +47,14 @@ def readPrint():
 
 def blink():
         while True: # Run forever
-            GPIO.output(11, GPIO.HIGH) # Turn on
-            sleep(0.5)                  # Sleep for 1 second
-            GPIO.output(11, GPIO.LOW)  # Turn off
-            sleep(0.5)                  # Sleep for 1 second
+            GPIO.output(11, GPIO.HIGH)
+            sleep(0.5)
+            GPIO.output(11, GPIO.LOW)
+            sleep(0.5)
 
 
 readPrint()
 
+#blink()
 
 
