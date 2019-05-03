@@ -6,6 +6,7 @@ import time
 mylcd = I2C_LCD_driver.lcd()
 
 mylcd.lcd_display_string("TRYING TO GATHER DATA", 1)
+
 def read_print():
     while True:
         humidity, temperature = Adafruit_DHT.read_retry(11, 4)
