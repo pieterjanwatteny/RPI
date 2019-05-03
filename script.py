@@ -8,8 +8,8 @@ import RPi.GPIO as GPIO
 mylcd = I2C_LCD_driver.lcd()
 mylcd.lcd_clear()
 
-mylcd.lcd_display_string("GATHERING DATA", 1)
-mylcd.lcd_display_string("PLEASE STAND BY..", 2)
+mylcd.lcd_display_string("NOMNOM DATA", 1)
+mylcd.lcd_display_string("PLS STAND BY...", 2)
 
 
 GPIO.setwarnings(False) # Ignore warning for now
@@ -18,7 +18,7 @@ GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input 
 def buttonPres():
     while True:
         if GPIO.input(10)==GPIO.HIGH:
-            mylcd.lcd_display_string("BUTTON PRESS", 2)
+            mylcd.lcd_display_string("PUSH ME BABY", 1)
             mylcd.lcd_clear()
 
 def readPrint():
