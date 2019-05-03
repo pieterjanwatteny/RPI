@@ -15,7 +15,7 @@ mylcd.lcd_display_string("PLS STAND BY...", 2)
 
 def buttonPress(channel):
     print("Button pushed")
-    mylcd.lcd_display_string("EL BUTTONE", 2)
+    blink()
 
 
 GPIO.setwarnings(False)
@@ -36,13 +36,12 @@ def readPrint():
 def blink():
         while True: # Run forever
             GPIO.output(11, GPIO.HIGH) # Turn on
-            sleep(1)                  # Sleep for 1 second
+            sleep(0.5)                  # Sleep for 1 second
             GPIO.output(11, GPIO.LOW)  # Turn off
-            sleep(1)                  # Sleep for 1 second
+            sleep(0.5)                  # Sleep for 1 second
 
 
 readPrint()
 
 
-blink()
 
