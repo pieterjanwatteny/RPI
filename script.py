@@ -13,6 +13,7 @@ mylcd.lcd_display_string("PLS STAND BY...", 2)
 
 def buttonPress(channel):
      print("Button pushed")
+     mylcd.lcd_display_string("EL BUTTONé", 2)
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
