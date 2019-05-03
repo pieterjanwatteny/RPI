@@ -41,6 +41,8 @@ def blink():
             sleep(1)                  # Sleep for 1 second
 
 
-blink()
 readPrint()
+
+
+blink()
 
