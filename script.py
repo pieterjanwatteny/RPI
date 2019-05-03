@@ -3,6 +3,7 @@ import sys
 import Adafruit_DHT
 import I2C_LCD_driver
 import time
+from time import sleep
 import RPi.GPIO as GPIO
 
 mylcd = I2C_LCD_driver.lcd()
@@ -13,11 +14,12 @@ mylcd.lcd_display_string("PLS STAND BY...", 2)
 
 def buttonPress(channel):
      print("Button pushed")
-     mylcd.lcd_display_string("EL BUTTONé", 2)
+     mylcd.lcd_display_string("EL BUTTONE", 2)
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
 GPIO.add_event_detect(10,GPIO.RISING,buttonPress, bouncetime=200)
 
 
@@ -30,3 +32,8 @@ def readPrint():
 
 readPrint()
 
+while True: # Run forever
+    GPIO.output(8, GPIO.HIGH) # Turn on
+    sleep(1)                  # Sleep for 1 second
+    GPIO.output(8, GPIO.LOW)  # Turn off
+    sleep(1)                  # Sleep for 1 second
