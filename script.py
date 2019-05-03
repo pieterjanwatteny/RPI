@@ -15,6 +15,7 @@ mylcd.lcd_display_string("PLS STAND BY...", 2)
 
 def buttonPress(channel):
     print("Button pushed")
+    print("Initiate Blinky")
     blink()
 
 
