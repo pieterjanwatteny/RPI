@@ -4,6 +4,7 @@ import Adafruit_DHT
 import I2C_LCD_driver
 import time
 import requests
+import json
 from time import sleep
 import RPi.GPIO as GPIO
 
@@ -13,8 +14,6 @@ mylcd.lcd_clear()
 mylcd.lcd_display_string("NOMNOM DATA", 1)
 mylcd.lcd_display_string("PLS STAND BY...", 2)
 
-
-
 def buttonPress(channel):
     print("Button pushed")
     setServoAngle(90)
@@ -23,7 +22,7 @@ def buttonPress(channel):
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.add_event_detect(10,GPIO.RISING,buttonPress, bouncetime=200)
+GPIO.add_event_detect(10,GPIO.RISING,buttonPress, bouncetime=400)
 GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(12, GPIO.OUT)
 
@@ -46,10 +45,11 @@ def readPrint():
         mylcd.lcd_display_string('Temp: {0:0.1f} C'.format(temperature,),1)
         mylcd.lcd_display_string('Humidity: {1:0.1f} %'.format(temperature,humidity), 2)
         print('Temp: {0:0.1f} C  Humidity: {1:0.1f} %'.format(temperature, humidity))
-        r = requests.post("https://ibiome.herokuapp.com/api/data/", json={"Temp":temperature ,"Humid":humidity});
+        payload= {"Temp":temperature,"Humid":humidity}
+        r = requests.post("https://ibiome.herokuapp.com/api/data",json=payload)
         print(r.text)
+        print(payload)
 
-        
 def blink():
         while True: # Run forever
             GPIO.output(11, GPIO.HIGH)
