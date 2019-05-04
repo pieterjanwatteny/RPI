@@ -4,7 +4,7 @@ import Adafruit_DHT
 import I2C_LCD_driver
 import time
 import requests
-import json
+
 from time import sleep
 import RPi.GPIO as GPIO
 
