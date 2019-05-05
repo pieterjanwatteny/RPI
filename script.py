@@ -53,6 +53,9 @@ def readPrint():
         print(r.text)
         print(payload)
 
+        if temperature < 14:
+            setServoAngle(180)
+
 def blink():
         while True: # Run forever
             GPIO.output(11, GPIO.HIGH)
