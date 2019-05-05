@@ -21,11 +21,13 @@ def buttonPress(channel):
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.add_event_detect(10,GPIO.RISING,buttonPress, bouncetime=400)
-GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(12, GPIO.OUT)
 
+GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.add_event_detect(10,GPIO.RISING,buttonPress, bouncetime=2000)
+
+GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
+
+GPIO.setup(12, GPIO.OUT)
 pwm = GPIO.PWM(12, 50)
 pwm.start(0)
 
@@ -45,6 +47,7 @@ def readPrint():
         mylcd.lcd_display_string('Temp: {0:0.1f} C'.format(temperature,),1)
         mylcd.lcd_display_string('Humidity: {1:0.1f} %'.format(temperature,humidity), 2)
         print('Temp: {0:0.1f} C  Humidity: {1:0.1f} %'.format(temperature, humidity))
+
         payload= {"Temp":temperature,"Humid":humidity}
         r = requests.post("https://ibiome.herokuapp.com/api/data",json=payload)
         print(r.text)
